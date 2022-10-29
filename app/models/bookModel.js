@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 var bookSchema = new mongoose.Schema({
     name: {
@@ -10,7 +11,7 @@ var bookSchema = new mongoose.Schema({
         required: true
     },
     user_id: {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true        
     },
     status: {

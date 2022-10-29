@@ -1,12 +1,13 @@
 var mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 var userBookSchema = new mongoose.Schema({
     user_id: {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true
     },
     book_id: {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true
     },
 });
