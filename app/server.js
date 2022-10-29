@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 dotenv.config();
 let PORT = process.env.PORT || 80;
-mongoose.connect("mongodb://mongo:27017/lianware-park");
+mongoose.connect("mongodb://mongo:27017/lianware_park");
 app.listen(PORT, () => {
 	console.log(`Server is up and running on ${PORT} ...`);
 });

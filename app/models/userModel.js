@@ -1,16 +1,8 @@
 var mongoose = require('mongoose'),
     bcrypt = require('bcrypt');
-const { Schema } = mongoose;
+    const { Schema } = mongoose;
 
 var userSchema = new mongoose.Schema({
-    firstname: {
-        type: String,
-        lowercase: true,
-    },
-    lastname: {
-        type: String,
-        lowercase: true,
-    },
     code: {
         type: String,
         required: true
@@ -31,19 +23,6 @@ var userSchema = new mongoose.Schema({
     amount: {
         type: Number,
         default: 20
-    },
-    phone: {
-        type: String,
-    },
-    birthday: {
-        type: String,
-    },
-    role: {
-        type: Number,
-        default: 0
-    },
-    gender: {
-        type: String,
     },
     created: {
         type: Date,

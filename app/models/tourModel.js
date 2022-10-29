@@ -20,15 +20,12 @@ var tourSchema = new mongoose.Schema({
     },
     capacity_min: {
         type: Number,
-        required: true
     },
     capacity_max: {
         type: Number,
-        required: true
     },
     organizer: {
         type: String,
-        required: true
     },
     about: {
         type: String,

@@ -8,7 +8,7 @@ exports.addTour = function(req, res) {
     var newTour = new Tour(req.body);
     newTour.save(function(err, tour){
         if(err) throw(err);
-        return res.json({Tour});
+        return res.json({tour});
     });
 };
 
