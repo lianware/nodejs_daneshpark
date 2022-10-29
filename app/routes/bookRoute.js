@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    var bookHandlers = require('../controllers/bookController.js');
+    var bookHandlers = require('../controllers/bookControllers.js');
     app.route('/add/book')
         .post(bookHandlers.addBook);
     app.route('/buy/book')

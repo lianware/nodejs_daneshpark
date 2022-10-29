@@ -14,7 +14,7 @@ let PORT = process.env.PORT || 80;
 mongoose.connect("mongodb://mongo:27017/lianware-park");
 app.listen(PORT, () => {
 	console.log(`Server is up and running on ${PORT} ...`);
-	});
+});
 userRoutes(app);
 bookRoutes(app);
 tourRoutes(app);
