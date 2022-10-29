@@ -31,6 +31,16 @@ var userSchema = new mongoose.Schema({
         type: Number,
         default: 20
     },
+    phone: {
+        type: String,
+    },
+    birthday: {
+        type: String,
+    },
+    role: {
+        type: Number,
+        default: 0
+    },
     gender: {
         type: String,
     },

@@ -1,13 +1,29 @@
 var Book = require('../models/bookModel.js'),
   User = require('../models/userModel.js');
-  Tour = require('../models/tourModel.js');
+  Tour = require('../models/tourModel.js'),
+  userBuy = require('../models/userBuyModel.js');
+
 
 exports.addTour = function(req, res) {
-    newTour = new Tour(req.body);
+    var newTour = new Tour(req.body);
     newTour.save(function(err, tour){
         if(err) throw(err);
         return res.json({Tour});
     });
+};
+
+exports.buyTour = function(req, res) {
+    User.findOne({remember_token: req.query.token}, function(err, user){
+        if(err) throw(err);
+        Tour.findOne({_id: req.query.id}, function(err, tour){
+            if(err) throw(err);
+            var newUserBuy = new userBuy({user_id: user._id, item_id: tour._id, name: tour.name, state: 1, amount: tour.price});
+            newUserBuy.save(function(err, res){
+                if(err) throw(err);
+            });
+            return res.json({user_id: user._id, item_id: tour._id, name: tour.name, category: "خرید تور آموزشی", amount: tour.price});
+        });
+    }); 
 };
 
 exports.getTour = function(req, res) {

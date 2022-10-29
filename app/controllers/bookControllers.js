@@ -2,11 +2,25 @@ var Book = require('../models/bookModel.js'),
   User = require('../models/userModel.js');
 
 exports.addBook = function(req, res) {
-    newBook = new Book(req.body);
+    var newBook = new Book(req.body);
     newBook.save(function(err, book){
         if(err) throw(err);
         return res.json({book});
     });
+};
+
+exports.buyBook = function(req, res) {
+    User.findOne({remember_token: req.query.token}, function(err, user){
+        if(err) throw(err);
+        Book.findOne({_id: req.query.id}, function(err, book){
+            if(err) throw(err);
+            var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, amount: book.amount});
+            newUserBuy.save(function(err, res){
+                if(err) throw(err);
+            });
+            return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", amount: book.amount});
+        });
+    }); 
 };
 
 exports.getBook = function(req, res) {
