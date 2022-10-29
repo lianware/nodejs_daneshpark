@@ -2,10 +2,13 @@ var Book = require('../models/bookModel.js'),
   User = require('../models/userModel.js');
 
 exports.addBook = function(req, res) {
-    var newBook = new Book(req.body);
-    newBook.save(function(err, book){
+    User.findOne({remember_token: req.headers.token}, function(err, user){
         if(err) throw(err);
-        return res.json({book});
+        var newBook = new Book({name: req.body.name, image_url: req.body.image_url, user_id: user._id});
+        newBook.save(function(err, book){
+            if(err) throw(err);
+            return res.json({book});
+        });
     });
 };
 
