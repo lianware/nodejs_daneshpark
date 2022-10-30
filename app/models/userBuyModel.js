@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+auto = require('mongoose-plugin-autoinc');
 const { Schema } = mongoose;
 
 var userBuySchema = new mongoose.Schema({
@@ -26,6 +27,12 @@ var userBuySchema = new mongoose.Schema({
         type: String,
         required: true
     }
+});
+
+userBuySchema.plugin(auto.autoIncrement,{
+    model: 'userBuy',
+    startAt: 1,
+    incrementBy: 1 
 });
 
 module.exports = mongoose.model('userBuy', userBuySchema);

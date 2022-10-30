@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+auto = require('mongoose-plugin-autoinc');
 const { Schema } = mongoose;
 
 var tourSchema = new mongoose.Schema({
@@ -35,6 +36,12 @@ var tourSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+});
+
+tourSchema.plugin(auto.autoIncrement,{
+    model: 'Tour',
+    startAt: 3210,
+    incrementBy: 40 
 });
 
 module.exports = mongoose.model('Tour', tourSchema);

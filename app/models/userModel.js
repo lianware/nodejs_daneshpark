@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
-    bcrypt = require('bcrypt');
-    const { Schema } = mongoose;
+auto = require('mongoose-plugin-autoinc'),
+bcrypt = require('bcrypt');
+const { Schema } = mongoose;
 
 var userSchema = new mongoose.Schema({
     code: {
@@ -33,5 +34,11 @@ var userSchema = new mongoose.Schema({
 userSchema.methods.comparePassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
+
+userSchema.plugin(auto.autoIncrement,{
+    model: 'User',
+    startAt: 1003,
+    incrementBy: 20
+});
 
 module.exports = mongoose.model('User', userSchema);
