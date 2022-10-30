@@ -1,10 +1,14 @@
 var Book = require('../models/bookModel.js'),
-  User = require('../models/userModel.js');
+  User = require('../models/userModel.js'),
+  userBuy = require('../models/userBuyModel.js'),
+  userBook = require('../models/userBookModel.js'),
+  persianDate = require('persian-date');
 
 exports.addBook = function(req, res) {
     User.findOne({remember_token: req.headers.token}, function(err, user){
         if(err) throw(err);
-        var newBook = new Book({name: req.body.name, image_url: req.body.image_url, user_id: user._id});
+        req.body.user_id = user._id;
+        var newBook = new Book(req.body);
         newBook.save(function(err, book){
             if(err) throw(err);
             return res.json({book});
@@ -17,11 +21,15 @@ exports.buyBook = function(req, res) {
         if(err) throw(err);
         Book.findOne({_id: req.query.id}, function(err, book){
             if(err) throw(err);
-            var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, amount: book.amount});
+            var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, amount: book.amount, date: new persianDate().format("LLLL")});
             newUserBuy.save(function(err, res){
                 if(err) throw(err);
             });
-            return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", amount: book.amount});
+            var newUserBook = new userBook({user_id: user._id, book_id: book._id});
+            newUserBook.save(function(err, res){
+                if(err) throw(err);
+            });
+            return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", amount: book.amount, date: new persianDate().format("LLLL")});
         });
     }); 
 };

@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+persianDate = require('persian-date');
 const { Schema } = mongoose;
 
 var bookSchema = new mongoose.Schema({
@@ -23,8 +24,8 @@ var bookSchema = new mongoose.Schema({
         default: 20
     },
     created: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: new persianDate().format("L")
     }
 });
 
