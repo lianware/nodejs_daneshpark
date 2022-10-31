@@ -1,6 +1,4 @@
-var jwt = require('jsonwebtoken'),
-  dotenv = require('dotenv'),
-  bcrypt = require('bcrypt'),
+var bcrypt = require('bcrypt'),
   User = require('../models/userModel.js');
 
 exports.authenticate = function(req, res) {
@@ -17,10 +15,8 @@ exports.authenticate = function(req, res) {
 };
 
 exports.register = function(req, res) {
-    dotenv.config();
     var newUser = new User(req.body);
     newUser.password = bcrypt.hashSync(req.body.password, 10);
-    newUser.remember_token = jwt.sign({body: req.body}, process.env.JWT_SECRET_KEY);
     newUser.save(function(err, user) {
       if(err) throw(err);
       user.password = undefined;

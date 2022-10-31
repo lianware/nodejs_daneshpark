@@ -1,11 +1,37 @@
 var mongoose = require('mongoose'),
+persianDate = require('persian-date'),
 auto = require('mongoose-plugin-autoinc'),
+dotenv = require('dotenv'),
+jwt = require('jsonwebtoken'),
 bcrypt = require('bcrypt');
 const { Schema } = mongoose;
 
+
+dotenv.config();
 var userSchema = new mongoose.Schema({
+    firstname: {
+        type: String,
+        trim: true
+    },
+    lastname: {
+        type: String,
+        trim: true
+    },
+    birthday: {
+        type: String,
+        trim: true
+    },
+    gender: {
+        type: String,
+        trim: true
+    },
+    phone: {
+        type: Number,
+        trim: true
+    },
     code: {
         type: String,
+        unique: true,
         required: true
     },
     email: {
@@ -19,15 +45,16 @@ var userSchema = new mongoose.Schema({
         required: true
     },
     remember_token: {
-        type: String
+        type: String,
+        default: jwt.sign({email: this.email, password: this.password}, process.env.JWT_SECRET_KEY)
     },
     amount: {
         type: Number,
         default: 20
     },
     created: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: new persianDate().format("LLLL")
     }
 });
 

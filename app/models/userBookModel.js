@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 
 var userBookSchema = new mongoose.Schema({
     user_id: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     book_id: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     },
 });

@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 
 var userBuySchema = new mongoose.Schema({
     user_id: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     item_id: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     name: {
@@ -19,7 +19,7 @@ var userBuySchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    amount: {
+    price: {
         type: Number,
         required: true
     },

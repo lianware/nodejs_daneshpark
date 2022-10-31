@@ -12,15 +12,19 @@ var bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    about: {
+        type: String,
+        required: true
+    },
     user_id: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true        
     },
     status: {
         type: Number,
         default: 0
     },
-    amount: {
+    price: {
         type: Number,
         default: 20
     },

@@ -21,7 +21,7 @@ exports.buyBook = function(req, res) {
         if(err) throw(err);
         Book.findOne({_id: req.query.id}, function(err, book){
             if(err) throw(err);
-            var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, amount: book.amount, date: new persianDate().format("LLLL")});
+            var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, price: book.price, date: new persianDate().format("LLLL")});
             newUserBuy.save(function(err, res){
                 if(err) throw(err);
             });
@@ -29,7 +29,7 @@ exports.buyBook = function(req, res) {
             newUserBook.save(function(err, res){
                 if(err) throw(err);
             });
-            return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", amount: book.amount, date: new persianDate().format("LLLL")});
+            return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", price: book.price, date: new persianDate().format("LLLL")});
         });
     }); 
 };
@@ -52,7 +52,7 @@ exports.getBooks = function(req, res) {
 };
 
 exports.getAuthor = function(req, res) {
-    Book.findOne({name: req.query.name}, function(err, book){
+    Book.findOne({_id: req.query.id}, function(err, book){
         if(err) throw(err);
         User.findOne({_id: book.user_id}, function(err, user){
             if(err) throw(err);
