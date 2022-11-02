@@ -23,3 +23,10 @@ exports.getTransactions = function(req, res) {
         return res.json({trans});
     });
 };
+
+exports.getUserTransactions = function(req, res) {
+    userBuy.find({user_id: req.query.id}, function(err, trans){
+        if(err) throw(err);
+        return res.json({trans});
+    });
+};

@@ -18,11 +18,19 @@ exports.buyTour = function(req, res) {
         if(err) throw(err);
         Tour.findOne({_id: req.query.id}, function(err, tour){
             if(err) throw(err);
-            var newUserBuy = new userBuy({user_id: user._id, item_id: tour._id, name: tour.name, state: 1, price: tour.price, date: new persianDate().format("LLLL")});
-            newUserBuy.save(function(err, res){
-                if(err) throw(err);
-            });
-            return res.json({user_id: user._id, item_id: tour._id, name: tour.name, category: "خرید تور آموزشی", price: tour.price, date: new persianDate().format("LLLL")});
+            if(user.amount >= tour.price){
+                user.amount -= tour.price;
+                var newUserBuy = new userBuy({user_id: user._id, item_id: tour._id, name: tour.name, state: 1, price: tour.price, date: new persianDate().format("LLLL")});
+                user.save(function(err, res){
+                    if(err) throw(err);
+                });
+                newUserBuy.save(function(err, res){
+                    if(err) throw(err);
+                });
+                return res.json({user_id: user._id, item_id: tour._id, name: tour.name, category: "خرید تور آموزشی", price: tour.price, date: new persianDate().format("LLLL")});
+            } else {
+                return res.json({message: "موجودی شما کافی نیست"});
+            }
         });
     }); 
 };

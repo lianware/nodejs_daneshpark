@@ -4,7 +4,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.0",
+    "mongoose": "^6.7.1",
     "mongoose-plugin-autoinc": "^1.1.9",
     "persian-date": "^1.1.0"
   }

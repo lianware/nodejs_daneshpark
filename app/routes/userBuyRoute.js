@@ -6,4 +6,6 @@ module.exports = function(app) {
         .get(transactionHandlers.getTransaction);
     app.route('/get/transactions')
         .get(transactionHandlers.getTransactions);
+    app.route('/get/transactions/user')
+        .get(transactionHandlers.getUserTransactions);
 };
