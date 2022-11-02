@@ -4,29 +4,29 @@ var Book = require('../models/bookModel.js'),
 
 exports.addTransaction = function(req, res) {
     var newTrans = new userBuy(req.body);
-    newTrans.save(function(err, trans){
+    newTrans.save(function(err, tran){
         if(err) throw(err);
-        return res.json({trans});
+        return res.json({result: tran});
     });
 };
 
 exports.getTransaction = function(req, res) {
     userBuy.findOne({_id: req.query.id}, function(err, tran){
         if(err) throw(err);
-        return res.json({tran});
+        return res.json({result: tran});
     });
 };
 
 exports.getTransactions = function(req, res) {
     userBuy.find({}, function(err, trans){
         if(err) throw(err);
-        return res.json({trans});
+        return res.json({results: trans});
     });
 };
 
 exports.getUserTransactions = function(req, res) {
     userBuy.find({user_id: req.query.id}, function(err, trans){
         if(err) throw(err);
-        return res.json({trans});
+        return res.json({results: trans});
     });
 };

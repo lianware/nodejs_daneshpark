@@ -9,7 +9,7 @@ exports.addTour = function(req, res) {
     var newTour = new Tour(req.body);
     newTour.save(function(err, tour){
         if(err) throw(err);
-        return res.json({tour});
+        return res.json({result: tour});
     });
 };
 
@@ -29,7 +29,7 @@ exports.buyTour = function(req, res) {
                 });
                 return res.json({user_id: user._id, item_id: tour._id, name: tour.name, category: "خرید تور آموزشی", price: tour.price, date: new persianDate().format("LLLL")});
             } else {
-                return res.json({message: "موجودی شما کافی نیست"});
+                return res.json({message: "موجودی شما کافی نیست", error: true});
             }
         });
     }); 
@@ -38,13 +38,13 @@ exports.buyTour = function(req, res) {
 exports.getTour = function(req, res) {
     Tour.findOne({_id: req.query.id}, function(err, tour){
         if(err) throw(err);
-        return res.json({tour});
+        return res.json({result: tour});
     });
 };
 
 exports.getTours = function(req, res) {
     Tour.find({}, function(err, tours){
         if(err) throw(err);
-        return res.json({tours});
+        return res.json({results: tours});
     });
 };

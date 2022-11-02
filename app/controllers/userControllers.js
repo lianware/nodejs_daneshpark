@@ -5,7 +5,7 @@ exports.authenticate = function(req, res) {
   User.findOne({email: req.body.email}, function(err, user){
     if(err) throw err;
     if(!user || !user.comparePassword(req.body.password)) {
-      return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });
+      return res.status(401).json({message: 'نام کاربری یا رمز عبور شما نادرست می باشد', error: true});
     }
     token = user.remember_token;
     user.remember_token = undefined;
@@ -21,7 +21,7 @@ exports.register = function(req, res) {
       if(err) throw(err);
       user.password = undefined;
       user.remember_token = undefined;
-      return res.json(user);
+      return res.json({result: user});
     });
   };
   
