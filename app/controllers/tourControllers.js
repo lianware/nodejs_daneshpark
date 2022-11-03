@@ -7,10 +7,14 @@ var Book = require('../models/bookModel.js'),
 
 exports.addTour = function(req, res) {
     var newTour = new Tour(req.body);
-    newTour.save(function(err, tour){
-        if(err) throw(err);
-        return res.json({result: tour});
-    });
+    if(!newTour.validateSync()){
+        newTour.save(function(err, tour){
+            if(err) throw(err);
+            return res.json({result: tour});
+        });
+    } else {
+        return res.status(400).json({message: newTour.validateSync().message, error: true});
+    }
 };
 
 exports.buyTour = function(req, res) {
@@ -27,12 +31,20 @@ exports.buyTour = function(req, res) {
             if(user.amount >= tour.price){
                 user.amount -= tour.price;
                 var newUserBuy = new userBuy({user_id: user._id, item_id: tour._id, name: tour.name, state: 1, price: tour.price, date: new persianDate().format("LLLL")});
-                user.save(function(err, res){
-                    if(err) throw(err);
-                });
-                newUserBuy.save(function(err, res){
-                    if(err) throw(err);
-                });
+                if(!user.validateSync()){
+                    user.save(function(err, res){
+                        if(err) throw(err);
+                    });
+                } else {
+                    return res.status(400).json({message: user.validateSync().message, error: true});
+                }
+                if(!newUserBuy.validateSync()){
+                    newUserBuy.save(function(err, res){
+                        if(err) throw(err);
+                    });
+                } else {
+                    return res.status(400).json({message: newUserBuy.validateSync().message, error: true});
+                }
                 return res.json({user_id: user._id, item_id: tour._id, name: tour.name, category: "خرید تور آموزشی", price: tour.price, date: new persianDate().format("LLLL")});
             } else {
                 return res.json({message: "موجودی شما کافی نیست", error: true});

@@ -4,10 +4,14 @@ var Book = require('../models/bookModel.js'),
 
 exports.addTransaction = function(req, res) {
     var newTrans = new userBuy(req.body);
-    newTrans.save(function(err, tran){
-        if(err) throw(err);
-        return res.json({result: tran});
-    });
+    if(!newTrans.validateSync()){
+        newTrans.save(function(err, tran){
+            if(err) throw(err);
+            return res.json({result: tran});
+        });
+    } else {
+        return res.status(400).json({message: newTrans.validateSync().message, error: true});
+    }
 };
 
 exports.getTransaction = function(req, res) {

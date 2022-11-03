@@ -12,10 +12,14 @@ exports.addBook = function(req, res) {
         }
         req.body.user_id = user._id;
         var newBook = new Book(req.body);
-        newBook.save(function(err, book){
-            if(err) throw(err);
-            return res.json({result: book});
-        });
+        if(!newBook.validateSync()){
+            newBook.save(function(err, book){
+                if(err) throw(err);
+                return res.json({result: book});
+            });
+        } else {
+            return res.status(400).json({message: newBook.validateSync().message, error: true});
+        }
     });
 };
 
@@ -34,15 +38,27 @@ exports.buyBook = function(req, res) {
                 user.amount -= book.price;
                 var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, price: book.price, date: new persianDate().format("LLLL")});
                 var newUserBook = new userBook({user_id: user._id, book_id: book._id});
-                user.save(function(err, res){
-                    if(err) throw(err);
-                });
-                newUserBuy.save(function(err, res){
-                    if(err) throw(err);
-                });
-                newUserBook.save(function(err, res){
-                    if(err) throw(err);
-                });
+                if(!user.validateSync()){
+                    user.save(function(err, res){
+                        if(err) throw(err);
+                    });
+                } else {
+                    return res.status(400).json({message: user.validateSync().message, error: true});
+                }
+                if(!newUserBuy.validateSync()){
+                    newUserBuy.save(function(err, res){
+                        if(err) throw(err);
+                    });
+                } else {
+                    return res.status(400).json({message: newUserBuy.validateSync().message, error: true});
+                }
+                if(!newUserBook.validateSync()){
+                    newUserBook.save(function(err, res){
+                        if(err) throw(err);
+                    });
+                } else {
+                    return res.status(400).json({message: newUserBook.validateSync().message, error: true});
+                }
                 return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", price: book.price, date: new persianDate().format("LLLL")});
             } else {
                 return res.json({message: "موجودی شما کافی نیست", error: true});

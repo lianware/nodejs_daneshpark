@@ -17,11 +17,15 @@ exports.authenticate = function(req, res) {
 exports.register = function(req, res) {
     var newUser = new User(req.body);
     newUser.password = bcrypt.hashSync(req.body.password, 10);
-    newUser.save(function(err, user) {
-      if(err) throw(err);
-      user.password = undefined;
-      user.remember_token = undefined;
-      return res.json({result: user});
-    });
+    if(!newUser.validateSync()){    
+        newUser.save(function(err, user) {
+          if(err) throw(err);
+          user.password = undefined;
+          user.remember_token = undefined;
+          return res.json({result: user});
+        });
+    } else {
+        return res.status(400).json({message: newUser.validateSync().message, error: true});
+    }
   };
   
