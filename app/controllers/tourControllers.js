@@ -16,6 +16,9 @@ exports.addTour = function(req, res) {
 exports.buyTour = function(req, res) {
     User.findOne({remember_token: req.query.token}, function(err, user){
         if(err) throw(err);
+        if(!user){
+            return res.status(400).json({message: "توکن وارد شده نامعتبر است", error: true});
+        }
         Tour.findOne({_id: req.query.id}, function(err, tour){
             if(err) throw(err);
             if(user.amount >= tour.price){
@@ -38,6 +41,9 @@ exports.buyTour = function(req, res) {
 exports.getTour = function(req, res) {
     Tour.findOne({_id: req.query.id}, function(err, tour){
         if(err) throw(err);
+        if(!tour){
+            return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
+        }
         return res.json({result: tour});
     });
 };

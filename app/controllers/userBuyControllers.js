@@ -13,6 +13,9 @@ exports.addTransaction = function(req, res) {
 exports.getTransaction = function(req, res) {
     userBuy.findOne({_id: req.query.id}, function(err, tran){
         if(err) throw(err);
+        if(!tran){
+            return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
+        }
         return res.json({result: tran});
     });
 };
@@ -27,6 +30,9 @@ exports.getTransactions = function(req, res) {
 exports.getUserTransactions = function(req, res) {
     userBuy.find({user_id: req.query.id}, function(err, trans){
         if(err) throw(err);
+        if(!trans){
+            return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
+        }
         return res.json({results: trans});
     });
 };

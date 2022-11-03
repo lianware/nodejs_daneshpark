@@ -7,6 +7,9 @@ var Book = require('../models/bookModel.js'),
 exports.addBook = function(req, res) {
     User.findOne({remember_token: req.headers.token}, function(err, user){
         if(err) throw(err);
+        if(!user){
+            return res.status(400).json({message: "توکن وارد شده نامعتبر است", error: true});
+        }
         req.body.user_id = user._id;
         var newBook = new Book(req.body);
         newBook.save(function(err, book){
@@ -19,6 +22,9 @@ exports.addBook = function(req, res) {
 exports.buyBook = function(req, res) {
     User.findOne({remember_token: req.query.token}, function(err, user){
         if(err) throw(err);
+        if(!user){
+            return res.status(400).json({message: "توکن وارد شده نامعتبر است", error: true});
+        }
         Book.findOne({_id: req.query.id}, function(err, book){
             if(err) throw(err);
             if(user.amount >= book.price){
@@ -45,6 +51,9 @@ exports.buyBook = function(req, res) {
 exports.getBook = function(req, res) {
     User.findOne({remember_token: req.query.token}, function(err, user){
         if(err) throw(err);
+        if(!user){
+            return res.status(400).json({message: "توکن وارد شده نامعتبر است", error: true});
+        }
         Book.find({user_id: user._id}, function(err, book){
             if(err) throw(err);
             return res.json({results: book});
@@ -62,6 +71,9 @@ exports.getBooks = function(req, res) {
 exports.getAuthor = function(req, res) {
     Book.findOne({_id: req.query.id}, function(err, book){
         if(err) throw(err);
+        if(!book){
+            return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
+        }
         User.findOne({_id: book.user_id}, function(err, user){
             if(err) throw(err);
             user.password = undefined;
