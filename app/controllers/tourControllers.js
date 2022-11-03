@@ -21,6 +21,9 @@ exports.buyTour = function(req, res) {
         }
         Tour.findOne({_id: req.query.id}, function(err, tour){
             if(err) throw(err);
+            if(!tour){
+                return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
+            }            
             if(user.amount >= tour.price){
                 user.amount -= tour.price;
                 var newUserBuy = new userBuy({user_id: user._id, item_id: tour._id, name: tour.name, state: 1, price: tour.price, date: new persianDate().format("LLLL")});

@@ -27,6 +27,9 @@ exports.buyBook = function(req, res) {
         }
         Book.findOne({_id: req.query.id}, function(err, book){
             if(err) throw(err);
+            if(!book){
+                return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
+            }
             if(user.amount >= book.price){
                 user.amount -= book.price;
                 var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, price: book.price, date: new persianDate().format("LLLL")});
@@ -56,6 +59,9 @@ exports.getBook = function(req, res) {
         }
         Book.find({user_id: user._id}, function(err, book){
             if(err) throw(err);
+            if(!book){
+                return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
+            }
             return res.json({results: book});
         });
     });
