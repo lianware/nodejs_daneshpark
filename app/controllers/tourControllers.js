@@ -21,7 +21,7 @@ exports.buyTour = function(req, res) {
     User.findOne({remember_token: req.query.token}, function(err, user){
         if(err) throw(err);
         if(!user){
-            return res.status(400).json({message: "توکن وارد شده نامعتبر است", error: true});
+            return res.status(401).json({message: "توکن وارد شده نامعتبر است", error: true});
         }
         Tour.findOne({_id: req.query.id}, function(err, tour){
             if(err) throw(err);
@@ -47,7 +47,7 @@ exports.buyTour = function(req, res) {
                 }
                 return res.json({user_id: user._id, item_id: tour._id, name: tour.name, category: "خرید تور آموزشی", price: tour.price, date: new persianDate().format("LLLL")});
             } else {
-                return res.json({message: "موجودی شما کافی نیست", error: true});
+                return res.status(400).json({message: "موجودی شما کافی نیست", error: true});
             }
         });
     }); 
