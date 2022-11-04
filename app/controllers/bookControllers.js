@@ -29,41 +29,48 @@ exports.buyBook = function(req, res) {
         if(!user){
             return res.status(401).json({message: "توکن وارد شده نامعتبر است", error: true});
         }
-        Book.findOne({_id: req.query.id}, function(err, book){
+        userBuy.findOne({$and: [{user_id: user._id}, {item_id: req.query.id}]}, function(err, uBuy){
             if(err) throw(err);
-            if(!book){
-                return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
-            }
-            if(user.amount >= book.price){
-                user.amount -= book.price;
-                var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, price: book.price, date: new persianDate().format("LLLL")});
-                var newUserBook = new userBook({user_id: user._id, book_id: book._id});
-                if(!user.validateSync()){
-                    user.save(function(err, res){
-                        if(err) throw(err);
-                    });
-                } else {
-                    return res.status(400).json({message: user.validateSync().message, error: true});
-                }
-                if(!newUserBuy.validateSync()){
-                    newUserBuy.save(function(err, res){
-                        if(err) throw(err);
-                    });
-                } else {
-                    return res.status(400).json({message: newUserBuy.validateSync().message, error: true});
-                }
-                if(!newUserBook.validateSync()){
-                    newUserBook.save(function(err, res){
-                        if(err) throw(err);
-                    });
-                } else {
-                    return res.status(400).json({message: newUserBook.validateSync().message, error: true});
-                }
-                return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", price: book.price, date: new persianDate().format("LLLL")});
+            if(uBuy){
+                return res.status(400).json({message: "این کتاب قبلا توسط شما خریداری شده است", error: true});   
             } else {
-                return res.status(400).json({message: "موجودی شما کافی نیست", error: true});
+                Book.findOne({_id: req.query.id}, function(err, book){
+                    if(err) throw(err);
+                    if(!book){
+                        return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
+                    }
+                    if(user.amount >= book.price){
+                        user.amount -= book.price;
+                        var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, price: book.price, date: new persianDate().format("LLLL")});
+                        var newUserBook = new userBook({user_id: user._id, book_id: book._id});
+                        if(!user.validateSync()){
+                            user.save(function(err, res){
+                                if(err) throw(err);
+                            });
+                        } else {
+                            return res.status(400).json({message: user.validateSync().message, error: true});
+                        }
+                        if(!newUserBuy.validateSync()){
+                            newUserBuy.save(function(err, res){
+                                if(err) throw(err);
+                            });
+                        } else {
+                            return res.status(400).json({message: newUserBuy.validateSync().message, error: true});
+                        }
+                        if(!newUserBook.validateSync()){
+                            newUserBook.save(function(err, res){
+                                if(err) throw(err);
+                            });
+                        } else {
+                            return res.status(400).json({message: newUserBook.validateSync().message, error: true});
+                        }
+                        return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", price: book.price, date: new persianDate().format("LLLL")});
+                    } else {
+                        return res.status(400).json({message: "موجودی شما کافی نیست", error: true});
+                    }
+        
+                });
             }
-
         });
     }); 
 };
