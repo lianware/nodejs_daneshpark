@@ -30,7 +30,6 @@ var bookSchema = new mongoose.Schema({
     },
     created: {
         type: String,
-        default: new persianDate().format("L")
     }
 });
 

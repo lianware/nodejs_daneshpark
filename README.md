@@ -1,11 +1,8 @@
-# *DaneshPark* - NODE API
+# *DaneshPark* - API
 
 In this document we introduce ***DaneshPark*** API
 
 ## Authentication
-
-> If you want to have good experience work with this API you should get
-> your unique ***token*** through this way :
 - POST `/user/authenticate`
 - Body `{
   "email": {email}<String>,

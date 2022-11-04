@@ -10,6 +10,7 @@ exports.addBook = function(req, res) {
         if(!user){
             return res.status(401).json({message: "توکن وارد شده نامعتبر است", error: true});
         }
+        req.body.created = new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL");
         req.body.user_id = user._id;
         var newBook = new Book(req.body);
         if(!newBook.validateSync()){
@@ -41,7 +42,7 @@ exports.buyBook = function(req, res) {
                     }
                     if(user.amount >= book.price){
                         user.amount -= book.price;
-                        var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, price: book.price, date: new persianDate().format("LLLL")});
+                        var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, price: book.price, date: new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL")});
                         var newUserBook = new userBook({user_id: user._id, book_id: book._id});
                         if(!user.validateSync()){
                             user.save(function(err, res){
@@ -64,7 +65,7 @@ exports.buyBook = function(req, res) {
                         } else {
                             return res.status(400).json({message: newUserBook.validateSync().message, error: true});
                         }
-                        return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", price: book.price, date: new persianDate().format("LLLL")});
+                        return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", price: book.price, date: new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL")});
                     } else {
                         return res.status(400).json({message: "موجودی شما کافی نیست", error: true});
                     }

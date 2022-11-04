@@ -1,5 +1,5 @@
 var Book = require('../models/bookModel.js'),
-  User = require('../models/userModel.js');
+  User = require('../models/userModel.js'),
   Tour = require('../models/tourModel.js'),
   userBuy = require('../models/userBuyModel.js'),
   persianDate = require('persian-date');
@@ -35,7 +35,7 @@ exports.buyTour = function(req, res) {
                     }            
                     if(user.amount >= tour.price){
                         user.amount -= tour.price;
-                        var newUserBuy = new userBuy({user_id: user._id, item_id: tour._id, name: tour.name, state: 1, price: tour.price, date: new persianDate().format("LLLL")});
+                        var newUserBuy = new userBuy({user_id: user._id, item_id: tour._id, name: tour.name, state: 1, price: tour.price, date: new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL")});
                         if(!user.validateSync()){
                             user.save(function(err, res){
                                 if(err) throw(err);
@@ -50,7 +50,7 @@ exports.buyTour = function(req, res) {
                         } else {
                             return res.status(400).json({message: newUserBuy.validateSync().message, error: true});
                         }
-                        return res.json({user_id: user._id, item_id: tour._id, name: tour.name, category: "خرید تور آموزشی", price: tour.price, date: new persianDate().format("LLLL")});
+                        return res.json({user_id: user._id, item_id: tour._id, name: tour.name, category: "خرید تور آموزشی", price: tour.price, date: new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL")});
                     } else {
                         return res.status(400).json({message: "موجودی شما کافی نیست", error: true});
                     }

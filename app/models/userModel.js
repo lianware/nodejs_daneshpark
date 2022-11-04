@@ -54,7 +54,6 @@ var userSchema = new mongoose.Schema({
     },
     created: {
         type: String,
-        default: new persianDate().format("LLLL")
     }
 });
 

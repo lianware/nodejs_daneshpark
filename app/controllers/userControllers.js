@@ -1,5 +1,6 @@
 var bcrypt = require('bcrypt'),
-  User = require('../models/userModel.js');
+  User = require('../models/userModel.js'),
+  persianDate = require('persian-date');
 
 exports.authenticate = function(req, res) {
   User.findOne({email: req.body.email}, function(err, user){
@@ -15,6 +16,7 @@ exports.authenticate = function(req, res) {
 };
 
 exports.register = function(req, res) {
+    req.body.created = new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL");
     var newUser = new User(req.body);
     newUser.password = bcrypt.hashSync(req.body.password, 10);
     if(!newUser.validateSync()){    
