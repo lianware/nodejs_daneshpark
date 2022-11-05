@@ -5,6 +5,9 @@ var bcrypt = require('bcrypt'),
 exports.authenticate = function(req, res) {
   User.findOne({email: req.body.email}, function(err, user){
     if(err) throw err;
+    if(!req.body.password){
+      return res.status(401).json({message: 'رمز عبور خود را وارد نمایید', error: true});
+    }
     if(!user || !user.comparePassword(req.body.password)) {
       return res.status(401).json({message: 'نام کاربری یا رمز عبور شما نادرست می باشد', error: true});
     }
