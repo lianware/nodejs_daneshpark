@@ -19,18 +19,25 @@ exports.authenticate = function(req, res) {
 };
 
 exports.register = function(req, res) {
-    req.body.created = new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL");
-    var newUser = new User(req.body);
-    newUser.password = bcrypt.hashSync(req.body.password, 10);
-    if(!newUser.validateSync()){    
-        newUser.save(function(err, user) {
-          if(err) throw(err);
-          user.password = undefined;
-          user.remember_token = undefined;
-          return res.json({result: user});
-        });
-    } else {
-        return res.status(400).json({message: newUser.validateSync().message, error: true});
-    }
+    User.findOne({code: req.body.code}, function(err, user){
+      if(err) throw(err);
+      if(user){
+        return res.status(400).json({message: 'کاربری با این اطلاعات در پایگاه داده موجود است', error: true});
+      } else {
+        req.body.created = new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL");
+        var newUser = new User(req.body);
+        newUser.password = bcrypt.hashSync(req.body.password, 10);
+        if(!newUser.validateSync()){    
+            newUser.save(function(err, user) {
+              if(err) throw(err);
+              user.password = undefined;
+              user.remember_token = undefined;
+              return res.json({result: user});
+            });
+        } else {
+            return res.status(400).json({message: newUser.validateSync().message, error: true});
+        }
+      }
+    });
   };
   
