@@ -1,4 +1,4 @@
-# *DaneshPark* - API
+# *DaneshPark*
  
 In this document we introduce ***DaneshPark*** API
 
