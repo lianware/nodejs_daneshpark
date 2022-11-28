@@ -3,7 +3,7 @@ var bcrypt = require('bcrypt'),
   persianDate = require('persian-date');
 
 exports.authenticate = function(req, res) {
-  User.findOne({email: req.body.email}, function(err, user){
+  User.findOne({code: req.body.code}, function(err, user){
     if(err) throw err;
     if(!req.body.password){
       return res.status(401).json({message: 'رمز عبور خود را وارد نمایید', error: true});

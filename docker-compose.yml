@@ -4,7 +4,7 @@ services:
     image: "node"
     working_dir: /home/node/app
     volumes:
-      - /home/geek/Docker-compose/app:/home/node/app
+      - /home/admin/nodejs_daneshpark/app:/home/node/app
     ports:
       - 80:80
     command: >
@@ -13,4 +13,4 @@ services:
   mongo:
     image: "mongo"
     volumes:
-      - /home/geek/Docker-compose/db:/data/db
+      - /home/admin/nodejs_daneshpark/db:/data/db
