@@ -10,7 +10,7 @@ userBuyRoutes = require('./routes/userBuyRoute.js');
 const app = express();
 app.use(express.json());
 dotenv.config();
-let PORT = process.env.PORT || 80;
+let PORT = process.env.PORT || 90;
 mongoose.connect("mongodb://daneshpa_daneshpa:eG7_Q^MK)mBS@daneshpark.org:27017/daneshpa_app");
 app.listen(PORT, () => {
 	console.log(`Server is up and running on ${PORT} ...`);

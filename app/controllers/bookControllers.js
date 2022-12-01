@@ -82,12 +82,12 @@ exports.getBook = function(req, res) {
         if(!user){
             return res.status(401).json({message: "توکن وارد شده نامعتبر است", error: true});
         }
-        Book.find({user_id: user._id}, function(err, book){
+        userBook.find({user_id: user._id}, function(err, userbook){
             if(err) throw(err);
-            if(!book){
+            if(!userbook){
                 return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
             }
-            return res.json({results: book});
+            return res.json({results: userbook});
         });
     });
 };
