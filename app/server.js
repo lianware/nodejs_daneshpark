@@ -5,6 +5,8 @@ userRoutes = require('./routes/userRoute.js'),
 bookRoutes = require('./routes/bookRoute.js'),
 tourRoutes = require('./routes/tourRoute.js'),
 userBuyRoutes = require('./routes/userBuyRoute.js');
+payRoutes = require('./routes/paymentRoute.js');
+chargeRoutes = require('./routes/userChargeRoute.js');
 
 	
 const app = express();
@@ -19,3 +21,6 @@ userRoutes(app);
 bookRoutes(app);
 tourRoutes(app);
 userBuyRoutes(app);
+payRoutes(app);
+chargeRoutes(app);
+

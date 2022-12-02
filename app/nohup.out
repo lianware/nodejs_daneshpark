@@ -1,1 +1,118 @@
 Server is up and running on 90 ...
+Server is up and running on 90 ...
+Server is up and running on 90 ...
+Server is up and running on 90 ...
+Server is up and running on 90 ...
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392532344
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392532668
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392532991
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392533285
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392533547
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392533809
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392534048
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392534243
+Server is up and running on 90 ...
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392534380
+Server is up and running on 90 ...
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392534553
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392534601
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392534835
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392534983
+/home/admin/nodejs_daneshpark/app/node_modules/express/lib/router/route.js:211
+        throw new Error(msg);
+        ^
+
+Error: Route.get() requires a callback function but got a [object Promise]
+    at Route.<computed> [as get] (/home/admin/nodejs_daneshpark/app/node_modules/express/lib/router/route.js:211:15)
+    at module.exports (/home/admin/nodejs_daneshpark/app/routes/paymentRoute.js:4:10)
+    at Object.<anonymous> (/home/admin/nodejs_daneshpark/app/server.js:23:1)
+    at Module._compile (internal/modules/cjs/loader.js:999:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)
+    at Module.load (internal/modules/cjs/loader.js:863:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:708:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:60:12)
+    at internal/main/run_main_module.js:17:47
+Server is up and running on 90 ...
+https://www.zarinpal.com/pg/StartPay/A00000000000000000000000000392535718
+The MerchantID must be 36 Characters.
+Server is up and running on 90 ...
+Error: Invalid URI "undefinedPaymentRequest.json"
+Server is up and running on 90 ...
+https://sandbox.zarinpal.com/pg/StartPay/000000000000000000000000000000993770
+Server is up and running on 90 ...
+hey Im here
+hey Im here
+hey Im here
+Server is up and running on 90 ...
+https://sandbox.zarinpal.com/pg/StartPay/000000000000000000000000000000993772
+Server is up and running on 90 ...
+404 - {"Status":-11,"Authority":"","errors":{"Email":["The email must be a valid email address."]}}
+404 - {"Status":-11,"Authority":"","errors":{"Email":["The email must be a valid email address."]}}
+404 - {"Status":-11,"Authority":"","errors":{"Email":["The email must be a valid email address."]}}
+404 - {"Status":-11,"Authority":"","errors":{"Email":["The email must be a valid email address."]}}
+Server is up and running on 90 ...
+Empty!
+Empty!
+Empty!
+Empty!
+Server is up and running on 90 ...
+Empty!
+Empty!
+Server is up and running on 90 ...
+Verified! Ref ID: 12345678
+Verified! Ref ID: 12345678
+Empty!
+Empty!
+Empty!
+Empty!
+Empty!
+Empty!
+Empty!
+Empty!
+Empty!
+/home/admin/nodejs_daneshpark/app/models/userChargeModel.js:36
+userBuySchema.plugin(auto.autoIncrement,{
+^
+
+ReferenceError: userBuySchema is not defined
+    at Object.<anonymous> (/home/admin/nodejs_daneshpark/app/models/userChargeModel.js:36:1)
+    at Module._compile (internal/modules/cjs/loader.js:999:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)
+    at Module.load (internal/modules/cjs/loader.js:863:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:708:14)
+    at Module.require (internal/modules/cjs/loader.js:887:19)
+    at require (internal/modules/cjs/helpers.js:74:18)
+    at Object.<anonymous> (/home/admin/nodejs_daneshpark/app/controllers/paymentController.js:4:20)
+    at Module._compile (internal/modules/cjs/loader.js:999:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)
+    at Module.load (internal/modules/cjs/loader.js:863:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:708:14)
+    at Module.require (internal/modules/cjs/loader.js:887:19)
+    at require (internal/modules/cjs/helpers.js:74:18)
+    at module.exports (/home/admin/nodejs_daneshpark/app/routes/paymentRoute.js:2:23)
+    at Object.<anonymous> (/home/admin/nodejs_daneshpark/app/server.js:23:1)
+/home/admin/nodejs_daneshpark/app/models/userChargeModel.js:36
+userBuySchema.plugin(auto.autoIncrement,{
+^
+
+ReferenceError: userBuySchema is not defined
+    at Object.<anonymous> (/home/admin/nodejs_daneshpark/app/models/userChargeModel.js:36:1)
+    at Module._compile (internal/modules/cjs/loader.js:999:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)
+    at Module.load (internal/modules/cjs/loader.js:863:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:708:14)
+    at Module.require (internal/modules/cjs/loader.js:887:19)
+    at require (internal/modules/cjs/helpers.js:74:18)
+    at Object.<anonymous> (/home/admin/nodejs_daneshpark/app/controllers/paymentController.js:4:20)
+    at Module._compile (internal/modules/cjs/loader.js:999:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1027:10)
+    at Module.load (internal/modules/cjs/loader.js:863:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:708:14)
+    at Module.require (internal/modules/cjs/loader.js:887:19)
+    at require (internal/modules/cjs/helpers.js:74:18)
+    at module.exports (/home/admin/nodejs_daneshpark/app/routes/paymentRoute.js:2:23)
+    at Object.<anonymous> (/home/admin/nodejs_daneshpark/app/server.js:23:1)
+Server is up and running on 90 ...
+404 - {"Status":-11,"Authority":"","errors":{"Authority":["The authority field is required."]}}
+404 - {"Status":-11,"Authority":"","errors":{"Authority":["The authority field is required."]}}
+404 - {"Status":-11,"Authority":"","errors":{"Authority":["The authority field is required."]}}

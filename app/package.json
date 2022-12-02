@@ -6,6 +6,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.3",
     "mongoose-plugin-autoinc": "^1.1.9",
-    "persian-date": "^1.1.0"
+    "persian-date": "^1.1.0",
+    "zarinpal-checkout": "^0.2.7"
   }
 }
