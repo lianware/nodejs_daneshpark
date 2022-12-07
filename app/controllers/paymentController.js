@@ -1,6 +1,6 @@
 const ZarinpalCheckout = require('zarinpal-checkout');
 // Merchant ID placed here
-const zarinpal = ZarinpalCheckout.create('34940947-178e-4e8c-ab1b-5bfdbb363c03', false);
+const zarinpal = ZarinpalCheckout.create('34940947-178e-4e8c-ab1b-5bfdbb363c03', true);
 const User = require('../models/userModel.js');
 const UserCharge = require('../models/userChargeModel.js');
 const persianDate = require('persian-date');
@@ -14,7 +14,7 @@ exports.AddPayment = function(req, res) {
         + req.query.description,
         Description: req.query.description,
         Email: 'school@daneshpark.org',
-        Mobile: '09177131738'
+        Mobile: '+989177131738'
     }).then(response => {
         if (response.status === 100) {
             return res.json({CallbackURL: response.url});
@@ -51,13 +51,19 @@ exports.CallBackPayment = function(req, res) {
             userCharge.save(function(err, res){
               if(err) throw(err);
             });
-            return res.json({status: req.query.Status});
+            return res.json({response: req.query.Status});
           }
         }).catch(err => {
           console.error(err);
         });
       });  
     } else if (req.query.Status == "NOK"){
-      return res.json({status: req.query.Status});  
+      zarinpal.UnverifiedTransactions().then(response => {
+        if (response.status === 100) {
+          return res.json({response: response.authorities});
+        }
+      }).catch(err => {
+        return res.json({response: err});
+      });   
     }
 };

@@ -1,7 +1,6 @@
 var Book = require('../models/bookModel.js'),
   User = require('../models/userModel.js'),
   userBuy = require('../models/userBuyModel.js'),
-  userBook = require('../models/userBookModel.js'),
   persianDate = require('persian-date');
 
 exports.addBook = function(req, res) {
@@ -43,7 +42,6 @@ exports.buyBook = function(req, res) {
                     if(user.amount >= book.price){
                         user.amount -= book.price;
                         var newUserBuy = new userBuy({user_id: user._id, item_id: book._id, name: book.name, state: -1, price: book.price, date: new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL")});
-                        var newUserBook = new userBook({user_id: user._id, book_id: book._id});
                         if(!user.validateSync()){
                             user.save(function(err, res){
                                 if(err) throw(err);
@@ -57,13 +55,6 @@ exports.buyBook = function(req, res) {
                             });
                         } else {
                             return res.status(400).json({message: newUserBuy.validateSync().message, error: true});
-                        }
-                        if(!newUserBook.validateSync()){
-                            newUserBook.save(function(err, res){
-                                if(err) throw(err);
-                            });
-                        } else {
-                            return res.status(400).json({message: newUserBook.validateSync().message, error: true});
                         }
                         return res.json({user_id: user._id, item_id: book._id, name: book.name, category: "خرید از فروشگاه کتاب", price: book.price, date: new persianDate(new Date((new Date()).toLocaleString("en-US", {timeZone: "Asia/Tehran"}))).format("LLLL")});
                     } else {
