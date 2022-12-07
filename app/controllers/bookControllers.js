@@ -67,22 +67,6 @@ exports.buyBook = function(req, res) {
     }); 
 };
 
-exports.getBook = function(req, res) {
-    User.findOne({remember_token: req.query.token}, function(err, user){
-        if(err) throw(err);
-        if(!user){
-            return res.status(401).json({message: "توکن وارد شده نامعتبر است", error: true});
-        }
-        userBook.find({user_id: user._id}, function(err, userbook){
-            if(err) throw(err);
-            if(!userbook){
-                return res.status(400).json({message: "شناسه وارد شده نامعتبر است", error: true});
-            }
-            return res.json({results: userbook});
-        });
-    });
-};
-
 exports.getBooks = function(req, res) {
     Book.find({}, function(err, books){
         if(err) throw(err);

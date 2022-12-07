@@ -4,8 +4,6 @@ module.exports = function(app) {
         .post(bookHandlers.addBook);
     app.route('/buy/book')
         .post(bookHandlers.buyBook);
-    app.route('/get/book')
-        .get(bookHandlers.getBook);
     app.route('/get/books')
         .get(bookHandlers.getBooks);
     app.route('/get/author/book')
