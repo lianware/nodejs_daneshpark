@@ -1,6 +1,7 @@
 const ZarinpalCheckout = require('zarinpal-checkout');
 // Merchant ID placed here
-const zarinpal = ZarinpalCheckout.create('34940947-178e-4e8c-ab1b-5bfdbb363c03', true);
+// const zarinpal = ZarinpalCheckout.create('34940947-178e-4e8c-ab1b-5bfdbb363c03', true);
+const zarinpal = ZarinpalCheckout.create('c34cc507-5bf8-4ac2-ba8c-cb469b30dc85', false);
 const User = require('../models/userModel.js');
 const UserCharge = require('../models/userChargeModel.js');
 const persianDate = require('persian-date');
